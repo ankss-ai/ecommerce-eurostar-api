@@ -2,6 +2,7 @@ const express = require('express');
 const authRoutes = require('./routes/authRoutes');
 const checkoutRoutes = require('./routes/checkoutRoutes');
 const healthRoutes = require('./routes/healthRoutes');
+const docsRoutes = require('./routes/docsRoutes');
 
 const app = express();
 
@@ -11,6 +12,9 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/checkout', checkoutRoutes);
 app.use('/healthcheck', healthRoutes);
+
+// Swagger UI + raw OpenAPI spec.
+app.use('/docs', docsRoutes);
 
 // 404 handler for unknown routes.
 app.use((req, res) => {

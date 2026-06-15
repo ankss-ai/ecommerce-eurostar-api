@@ -156,11 +156,23 @@ Response (`201`) — note the 10% cash discount applied:
 
 Using `"paymentMethod": "credit_card"` applies no discount (`discount: 0`).
 
+### API Documentation (Swagger)
+
+The OpenAPI 3.0 spec lives in [`swagger.json`](./swagger.json) at the project
+root. Interactive Swagger UI is served by the running API at:
+
+```
+http://localhost:3000/docs
+```
+
+The raw spec is also available at `http://localhost:3000/docs/swagger.json`.
+
 ### Endpoint Summary
 
-| Method | Path                | Auth | Purpose              |
-|--------|---------------------|------|----------------------|
-| GET    | `/healthcheck`      | No   | Service health       |
-| POST   | `/auth/register`    | No   | Create a user        |
-| POST   | `/auth/login`       | No   | Obtain a JWT token   |
-| POST   | `/checkout`         | Yes  | Perform a checkout   |
+| Method | Path                  | Auth | Purpose                  |
+|--------|-----------------------|------|--------------------------|
+| GET    | `/healthcheck`        | No   | Service health           |
+| POST   | `/auth/register`      | No   | Create a user            |
+| POST   | `/auth/login`         | No   | Obtain a JWT token       |
+| POST   | `/checkout`           | Yes  | Perform a checkout       |
+| GET    | `/docs`               | No   | Swagger UI documentation |
