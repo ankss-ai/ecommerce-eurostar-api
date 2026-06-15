@@ -1,0 +1,23 @@
+{
+  "name": "ecommerce-eurostar-api",
+  "version": "1.0.0",
+  "description": "REST API for an e-commerce demo with JWT auth and checkout (Eurostar conference).",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "express",
+    "jwt",
+    "ecommerce",
+    "rest-api"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
