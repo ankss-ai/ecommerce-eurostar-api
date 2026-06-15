@@ -6,6 +6,16 @@ const http = require('http');
 const baseUrl = process.env.BASE_URL || 'http://localhost:3000';
 let serverProcess;
 
+function isServerUp(url) {
+  return new Promise((resolve) => {
+    const req = http.get(`${url}/healthcheck`, (res) => {
+      res.resume();
+      resolve(true);
+    });
+    req.on('error', () => resolve(false));
+  });
+}
+
 function waitForServer(url, retries = 50, intervalMs = 100) {
   return new Promise((resolve, reject) => {
     const attempt = (remaining) => {
@@ -28,6 +38,11 @@ function waitForServer(url, retries = 50, intervalMs = 100) {
 exports.mochaHooks = {
   async beforeAll() {
     this.timeout(20000);
+    // Reuse an already-running server (e.g. started by the CI pipeline) to
+    // avoid a port conflict; only boot one ourselves when none is up.
+    if (await isServerUp(baseUrl)) {
+      return;
+    }
     serverProcess = spawn('node', ['src/server.js'], {
       stdio: 'inherit',
       env: process.env,
